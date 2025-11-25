@@ -108,36 +108,15 @@
 \cfoot{\thepage}												
 \rfoot{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Denne kodebiten lager en egen funksjon som heter \signature{}{}{} med input sted og navn. Den brukes litt lengre ned i koden
-\newcommand{\signature}[3]{
-\begin{minipage}[t]{0.9\textwidth}
-\vspace{1cm}
-
-    #1, \today
-\vspace{0.3cm}\\
-\includegraphics[scale = 0.09]{#3}
-%Dette er en redigert versjon fra den utdelte malen i faget, som lar deg legge inn et bilde av signaturen din på signaturstreken. Endre på scale og vspace-verdiene etter behov
-
-\noindent
-\begin{tabular}{cc}
-    \rule{6cm}{1pt} & \hspace{2cm} \\
-    #2 & 
-\end{tabular}
-\vspace{1cm}
-\end{minipage}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-\title{\textbf{Tittel}\\
+\title{\textbf{\LaTeX-kurs}\\
 \hspace{15pt}\\
-\Large{Undertittel}}
-\author{Per Robert Urdahl}
+\Large{Undertittel kan du ta her}}
+\author{Navnet ditt her}
 \date{\today}
 
-
+%%%%%%%%%%%%%%%%Begynnelsen på dokumentet%%%%%%%%%%%%%%%%%
 \begin{document}
 % Tittel %
 \maketitle
@@ -145,8 +124,6 @@
 \newpage
 % importerer fila som ligger i mappen Dokumenter og henter latexkoden derfra. Dette er for å ikke blande tekst og masse kode som er i dette dokumentet
 \input{rapport}
-\vfill % Gjør at signaturen havner nederst på siden, uavhengig av hvor mye tekst det er på den. Dette er en god praksis
-% \signature{Sted}{Navn}{Signaturbilde} % lager en signaturlinje.
 
 \newpage
 %Referansene skal alltid komme på egen side
