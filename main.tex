@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%Pakker og instillinger for dokumentet%%%%%%%%%%%%%%%%%
+
+\documentclass[pdftex, 10pt, norsk, a4paper, twoside]{article} 
+\usepackage[margin=1.3in]{geometry}							
+\usepackage[norsk]{babel}%Legger til norske bokstaver		
+\selectlanguage{norsk}%Får latex til å bruke norsk på steder der latex selv skriver ting. F.eks. Figur istedet for Figure	
+\usepackage[T1]{fontenc} %Definerer hvilken font som skal brukes. For spesielt interreserte er dette en 8-bit encoding med fonter som bruker 256 glyfer							
+\usepackage[utf8]{inputenc}%Tillater deg å skrive norske bokstaver direkte fra tastaturet, i steden for å bruke kommandoer.		
+
+%%%%%%%% Figur-ting %%%%%%%%%%%%%
+\usepackage{graphicx}% Nødvendig for å legge til bilder osv. 
+\usepackage{wrapfig} %Gjør at du kan ha text wrapping rundt figurer
+\usepackage{subcaption} %Gjør at du kan ha subfigurer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%% SI-enheter %%%%%%%%%%%%
+\usepackage{siunitx} % Lar deg bruke kommandoene \SI{tall}{\enhet} og \si{\enhet}. feks \si{\milli\gram\per\liter}. Dette er en veldig fin måte for å få konsistene enheter på. 
+\sisetup{output-decimal-marker = {,}}%sikrer , og ikke . slik det skal være på norsk
+\DeclareSIUnit{\bar}{bar} %Denne syntaksen kan du bruke for å lage nye SI-enheter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[section]{placeins}
+\usepackage{cancel}% for å kunne "stryke over" ting i ligninger feks \frac{\bcancel{b}}{\bcancel{b}} = 1
+\usepackage{fmtcount}
+\usepackage{booktabs}% lar deg bruke \toprule, \midrule og \bottomrule i tabeller for å lage pene tabeller.								
+\usepackage{multirow}% Lar deg lage rader inni radene i en tabell.
+\usepackage[pdftex,bookmarks,breaklinks]{hyperref} %legg til hidelinks hvis du ikke liker boksene rundt lenkene.
+\usepackage{parskip}% Gjør at latex tolker paragrafer og ikke bare ignorerer "white space"
+\usepackage{rotating} %Gir deg en rekke muligheter for å rotere ting
+\usepackage{amsmath, amsfonts, amssymb}							
+\usepackage[format=hang,font=footnotesize,labelfont=bf]{caption}% Gjør at captions under figurer og over tabeller blir pene.						
+\usepackage[version=3]{mhchem} % Tillater deg å skrive kjemiske formler
+\usepackage{epstopdf}% Omgjør .eps-filer til .pdf filer. Denne pakken er genial når man bruker chemdraw der man kan eksportere som eps. 
+\usepackage{textcomp,gensymb}
+\usepackage{float}% Tillater å bruke stor H i floats, dette kalles ofte for float of doom og er skjeldent anbefalt.
+\usepackage{fancyhdr}% Lar deg lage den fine headeren på toppen av siden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Vedlegg og kode %%%%%%%%%%%%%%%%%%%
+\usepackage{minted} %pakke for å vise kodefiler
+\usemintedstyle{perldoc} %penere stil
+\usepackage{verbatim} % pakke for å vise .txt-filer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% bibliografi %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{csquotes} %nødvendig for at biblatex skal fungere med babel på norsk.
+%sorting none gjør at referanselista kommer i siteringens rekkefølge. 
+%natbib er en annen pakke, som jeg tror er mye utbredt i andres maler, men den er egentlig ganske utdatert, og funker ikke med norsk i det hele tatt, så jeg tok meg bryet med å finne ut hvordan biblatex funket slik at du ikke må:)
+%\supercite i steden for bare \cite
+\usepackage[backend=biber, style=ieee, sorting = none]{biblatex}
+\addbibresource{referanser.bib}
+
+%Denne endrer et par ord som babel har gjort skikkelig teite, slik at det ser litt penere ut.
+\DefineBibliographyStrings{norsk}{
+    urlseen = {Lest},
+    url = {URL},
+    andothers = {et al\adddot}
+}
+\let\oldcite\cite
+\renewcommand{\cite}[1]{\textsuperscript{\oldcite{#1}}}
+%Blokken over endrer \cite-kommandoen slik at den gir sitering i klammeparentes og opphøyd skrift, slik det skal være i vitenskapelige rapporter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%% Intern referering %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{cleveref}%lar deg bruke kommando \Cref og \cref som legger inn ordet likning, tabell etc, med hhv stor og liten forbokstav.
+\AddToHook{cmd/appendix/before}{\crefalias{section}{appendix}} % Gjør at sections i vedlegg kalles vedlegg av cref
+\numberwithin{equation}{section}%Disse sørger for at tredje tabell i seksjon 2 blir (2.3) og ikke 15 eller noe sånt stygt.
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\crefname{appendix}{Vedlegg}{Vedlegg}
+\crefname{section}{Seksjon}{Seksjonene}
+%gjør figur til skjema, dette er strengt tatt et krav når du legger inn reaksjonsmekanismer. Kan fjernes om det er bilder du skal ha.
+%\addto\captionsnorsk{\renewcommand{\figurename}{Skjema}}
+%\crefname{figure}{Skjema}{Skjemaer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage{soul}%lar deg bruke kommandoen \hl{tekst} for å gjøre midlertidig tekst rød
+\sethlcolor{red}%velger at hl blir rød, og ikke feks lilla
+\pagestyle{fancy}
+\usepackage{diagbox} %lar deg ha skråstrek i tabeller øverst til venstre
+\usepackage[toc, page]{appendix}
+\usepackage{derivative} %gir deg korte kommandoer for derivasjon og partiellderivasjon
+\usepackage{enumitem} 
+\usepackage{chemfig} %kan skrive kjemiske formler
+\usepackage{todonotes} %lar deg legge inn TODO-lapper i margen
+\usepackage{xfrac} %lar deg ha skrå minibrøker i teksten
+\usepackage{array} %lar deg lage nye kolonne-typer i tabeller
+\newcolumntype{C}{>{$}c<{$}} %Stor C i kolonner i tabeller gir mattemodus på hele kolonna
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Setter noen instillinger for å gjøre ting pent :) 
+\setlength\headheight{22.5pt}	
+\floatstyle{plaintop}													
+\restylefloat{table}													
+\floatstyle{plain}														
+\restylefloat{figure}													
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Lager headeren
+\lhead{Navn}			
+\chead{}																
+\rhead{Fagkode etc  \\ \today}	
+\lfoot{}
+\cfoot{\thepage}												
+\rfoot{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Denne kodebiten lager en egen funksjon som heter \signature{}{}{} med input sted og navn. Den brukes litt lengre ned i koden
+\newcommand{\signature}[3]{
+\begin{minipage}[t]{0.9\textwidth}
+\vspace{1cm}
+
+    #1, \today
+\vspace{0.3cm}\\
+\includegraphics[scale = 0.09]{#3}
+%Dette er en redigert versjon fra den utdelte malen i faget, som lar deg legge inn et bilde av signaturen din på signaturstreken. Endre på scale og vspace-verdiene etter behov
+
+\noindent
+\begin{tabular}{cc}
+    \rule{6cm}{1pt} & \hspace{2cm} \\
+    #2 & 
+\end{tabular}
+\vspace{1cm}
+\end{minipage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\title{\textbf{Tittel}\\
+\hspace{15pt}\\
+\Large{Undertittel}}
+\author{Per Robert Urdahl}
+\date{\today}
+
+
+\begin{document}
+% Tittel %
+\maketitle
+\thispagestyle{empty}
+\newpage
+% importerer fila som ligger i mappen Dokumenter og henter latexkoden derfra. Dette er for å ikke blande tekst og masse kode som er i dette dokumentet
+\input{rapport}
+\vfill % Gjør at signaturen havner nederst på siden, uavhengig av hvor mye tekst det er på den. Dette er en god praksis
+% \signature{Sted}{Navn}{Signaturbilde} % lager en signaturlinje.
+
+\newpage
+%Referansene skal alltid komme på egen side
+\printbibliography
+
+\newpage 
+%Ny side for vedlegg også
+\appendix
+\renewcommand{\thesection}{\Alph{section}} % endrer nummerering av seksjoner i vedlegg til bokstaver
+\setcounter{page}{1} %setter sidetall på nytt
+\pagenumbering{roman} %setter sidetall til romertall i vedlegg
+\input{Dokumenter/Vedlegg}
+\end{document} 
